@@ -1,0 +1,10 @@
+{% block title %} Log In | Order app {% endblock %}
+
+{%block content%}
+<h3> Log in to Order App</h4>
+<form method='post'>
+ {% csrf_token %}
+ {{ form }}
+ <button type= 'submit'>Log In</button>
+</form>
+{% endblock %}
