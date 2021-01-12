@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Order_app'
+    'Order_app',
+    'channels'
 ]
 
 MIDDLEWARE = [
@@ -100,6 +101,18 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REDIS_URL = os.getenv('REDIS_URL','redis://localhost:6379')
+
+CHANNEK_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [REDIS_URL]
+        }
+    }
+}
+
+ASGI_APPLICATION = 'Kitchen_Order.routing.application'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
