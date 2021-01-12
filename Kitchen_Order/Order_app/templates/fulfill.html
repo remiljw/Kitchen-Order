@@ -1,15 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
-{% if  message  %} 
-{{ message }}
-{% else %}
-<h3>Counters</h3>
 <form method='post'>
 {% csrf_token %}
 {{ form.as_p }}
-<button type='submit'> Take Order</p></button>
+<button type='submit'> Fulfill Order</p></button>
 </form>
-{% endif %}
 
 
 {% endblock %}

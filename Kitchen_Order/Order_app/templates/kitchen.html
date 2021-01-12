@@ -3,7 +3,36 @@
 {% if  message  %}
 {{ message }}
 {% else %}
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
 <h3>Kitchen </h3>
+
+<table>
+
+  <tr>
+    <th>Order Number</th>
+    <th>Order Details</th>
+    <th>Time Taken</th>
+    <th>Taken By</th>
+    <th>Fulfilled</th>
+    <th> Action </th>
+
+  </tr>
+  {% for order in  orders %}
+  <tr>
+    <td>{{ order.order_number }}</td>
+    <td>{{ order.order_details}}</td>
+    <td>{{ order.order_date_time }}</td>
+    <td>{{ order.taken_by }}</td>
+    <td>{{ order.is_fulfilled }}</td>
+    <td><a href="{% url 'fulfill_order' id=order.id %}">Fulfill Order</a></td>
+
+  </tr>
+  {% endfor %}
+</table>
 {% endif %}
 
 

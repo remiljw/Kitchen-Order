@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import User, Order, USER_TYPES
+from .models import User, Orders
 
 class NewUserForm(UserCreationForm):
     password2 = None
@@ -9,7 +9,12 @@ class NewUserForm(UserCreationForm):
         model = User
         fields = ('username','password1', 'user_type')
 
-class NewOrder(forms.ModelForm):
+class NewOrderForm(forms.ModelForm):
     class Meta:
-        model = Order
+        model = Orders
         fields = ('order_number', 'order_details')
+
+class UpdateOrderForm(forms.ModelForm):
+    class Meta:
+        model = Orders
+        fields = ('order_number', 'order_details', 'is_fulfilled')

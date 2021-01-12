@@ -15,13 +15,15 @@ class User(AbstractUser):
     def __str__(self):
         return self.username
 
-class Order(models.Model):
-    order_number = models.IntegerField(default=0)
+
+
+class Orders(models.Model):
+    order_number = models.IntegerField(default='', unique=True)
     order_details = models.TextField(max_length=200)
     order_date_time = models.DateTimeField(auto_now_add=True)
-    taken_by = models.OneToOneField(User, primary_key= True, on_delete=models.CASCADE, related_name='Counter')
+    taken_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='Counter')
     is_fulfilled = models.BooleanField(default=False)
-    fulfilled_by = models.OneToOneField(User, on_delete=models.CASCADE, related_name='Kitchen')
+    fulfilled_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True,related_name='Kitchen')
 
     def __str__(self):
         return str(self.order_number)

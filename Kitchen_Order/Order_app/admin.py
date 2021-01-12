@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import User, Order
+from .models import User, Orders
 
 class CustomUserAdmin(UserAdmin):
     list_display = ['username', 'user_type']
@@ -16,6 +16,6 @@ class OrderAdmin(admin.ModelAdmin):
  
 
 admin.site.register(User, CustomUserAdmin)
-admin.site.register(Order, OrderAdmin)
+admin.site.register(Orders, OrderAdmin)
 
 # Register your models here.

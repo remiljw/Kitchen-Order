@@ -1,7 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .forms import NewUserForm, NewOrder
-from .models import User, Order
+from .forms import NewUserForm, NewOrderForm, UpdateOrderForm
+from .models import User, Orders
 from datetime import datetime
 
 
@@ -15,10 +15,6 @@ def dashboard(request):
         response = redirect('counter')
     elif user.user_type == 'kitchen':
         response  = redirect('kitchen')
-    else:
-        template_name = 'registration/login.html'
-        message = 'you do not have login access'
-
     return response
 
 
@@ -28,7 +24,8 @@ def kitchen(request):
         message = 'You are not authorized to view this page'
         return render(request, 'kitchen.html', {'message': message})
     else:
-        return render(request, 'kitchen.html')
+        orders = Orders.objects.filter(is_fulfilled=False)
+        return render(request, 'kitchen.html', {'orders':orders})
 
 
 def counter(request):
@@ -37,23 +34,22 @@ def counter(request):
         message = 'You are not authorized to view this page'
         return render(request, 'counters.html', {'message' : message})
     else:
-        form = NewOrder
+        form = NewOrderForm
         if request.method == 'POST':
-            form = NewOrder(request.POST)
+            form = NewOrderForm(request.POST)
             if form.is_valid():
                 new_order = form.save(commit=False)
                 new_order.taken_by= user
-                new_order.fulfilled_by = user
                 new_order.order_date_time = datetime.now()
                 new_order.save()
-                return redirect
+                return redirect('counter')
             else:
-                form = NewOrder
+                form = NewOrderForm
         return render(request, 'counters.html', {'form': form})
 
 
 def orders(request):
-    all_orders = Order.objects.all()
+    all_orders = Orders.objects.all()
     return render(request, 'orders.html', {'all_orders' : all_orders})
 
 
@@ -68,7 +64,21 @@ def manager(request):
             form = NewUserForm(request.POST)
             if form.is_valid():
                 form.save()
-                return redirect
+                return redirect('/')
             else:
                 form = NewUserForm
         return render(request, 'manager.html', {'form' : form})
+
+
+def fulfill_order(request, id):
+    user = request.user
+    obj = Orders.objects.get(id=id)
+    form = UpdateOrderForm(request.POST or None, instance=obj)
+    if form.is_valid():
+        update_order = form.save(commit=False)
+        update_order.fulfilled_by = user
+        update_order.save()
+        return redirect('kitchen')
+    else:
+        form = UpdateOrderForm(instance=obj)
+    return render(request, 'fulfill.html', {'form': form})
