@@ -1,4 +1,10 @@
-h1>Welcome to Counters Website</h1>
-
+{% extends 'base.html' %}
 {% block content %}
+{% if  message  %} 
+{{ message }}
+{% else %}
+<h3>Counters</h3>
+{% endif %}
+
+
 {% endblock %}

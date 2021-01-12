@@ -1,4 +1,11 @@
-h1>Welcome to Kitchen Website</h1>
-
+{% extends 'base.html' %}
 {% block content %}
+{% if  message  %}
+{{ message }}
+{% else %}
+<h3>Kitchen </h3>
+{% endif %}
+
+
+
 {% endblock %}

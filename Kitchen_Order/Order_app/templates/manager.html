@@ -1,4 +1,15 @@
-h1>Welcome to Manager Website</h1>
-
+{% extends 'base.html' %}
 {% block content %}
+{% if  message  %} 
+{{ message }}
+{% else %}
+<h1> Manager </h1>
+{% endif %}
+
+
+
+
+
+
+
 {% endblock %}

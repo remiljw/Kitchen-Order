@@ -5,9 +5,45 @@
     span.helptext {
         display: none;
     }
-</style>
+    ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    }
 
-<h1>Welcome to Awesome Website</h1>
+    li {
+    display: inline;
+    }
+    div{
+        display: inline;
+    }
+
+</style>
+<div> 
+        <h1>Welcome to Awesome Website</h1> 
+        <ul>
+        {% if request.user.user_type == 'manager' %}
+        
+                <li><a href="{% url 'manager' %}">Manager</a/li>
+                <li><a href="{% url 'kitchen' %}">Kitchen</a></li>
+                <li><a href="{% url 'counter' %}">Counter</a></li>
+                <li><a href="{% url 'order' %}">Orders</a></li>
+        
+                {% elif request.user.user_type == 'kitchen' %}
+                <li><a href="{% url 'kitchen' %}">Kitchen</a></li>
+                <li><a href="{% url 'order' %}">Orders</a></li>
+        
+                {% elif request.user.user_type == 'counter' %}
+                <li><a href="{% url 'counter' %}">Counter</a></li>
+                <li><a href="{% url 'order' %}">Orders</a></li>
+                {% endif %}
+        <ul>
+        <div>
+            <p> {{ request.user.username }} | {{ request.user.user_type}} </p>
+            <li><a href="{% url 'logout' %}">Log Out</a></li>
+        </div>
+
+</div>
 
 {% block content %}
 {% endblock %}
