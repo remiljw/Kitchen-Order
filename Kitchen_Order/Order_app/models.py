@@ -20,6 +20,7 @@ class Order(models.Model):
     order_details = models.CharField(max_length=200)
     order_date_time = models.DateTimeField()
     taken_by = models.OneToOneField(User, on_delete=models.CASCADE, related_name='Counter')
+    is_fulfilled = models.BooleanField(default=False)
     fulfilled_by = models.OneToOneField(User, on_delete=models.CASCADE, related_name='Kitchen')
 
     def __str__(self):

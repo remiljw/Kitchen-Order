@@ -4,6 +4,13 @@
 {{ message }}
 {% else %}
 <h1> Manager </h1>
+
+<p> Create New Users</p>
+<form method='post'>
+{% csrf_token %}
+{{ user_form.as_p }}
+<button type='submit'> Create User</p>
+</form>
 {% endif %}
 
 

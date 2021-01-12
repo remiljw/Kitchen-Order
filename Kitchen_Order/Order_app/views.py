@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from .forms import UserCreationForm
 from .models import User
 
 # Create your views here.
@@ -20,16 +21,20 @@ def dashboard(request):
 
 def kitchen(request):
     user = request.user
-    if user.user_type != 'manager' or 'kitchen':
+    if user.user_type == 'counter':
         message = 'You are not authorized to view this page'
-    return render(request, 'kitchen.html', {'message': message})
+        return render(request, 'kitchen.html', {'message': message})
+    else:
+        return render(request, 'kitchen.html')
 
 
 def counter(request):
     user = request.user
-    if user.user_type != 'manager' or 'counter':
+    if user.user_type == 'kitchen':
         message = 'You are not authorized to view this page'
-    return render(request, 'counters.html', {'message' : message})
+        return render(request, 'counters.html', {'message' : message})
+    else:
+         return render(request, 'counters.html')
 
 
 def orders(request):
@@ -40,4 +45,8 @@ def manager(request):
     user = request.user
     if user.user_type != 'manager':
         message = 'You are not authorized to view this page'
-    return render(request, 'manager.html', {'message' : message})
+        return render(request, 'manager.html', {'message' : message, 'user_form' : user_form})
+    else:
+        user_form = UserCreationForm
+        # message = 'You are not authorized to view this page'
+        return render(request, 'manager.html', {'user_form' : user_form})
