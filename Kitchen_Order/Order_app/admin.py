@@ -7,12 +7,15 @@ class CustomUserAdmin(UserAdmin):
     list_filter = ['username','user_type']
     search_fields = ['username', 'user_type']
     fieldsets = [
-        ('User', {'fields': ('username','user_type')})
+        ('User', {'fields': ('username','password', 'user_type')})
     ]
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ['order_number', 'order_details', 'order_date_time',
+                    'taken_by', 'is_fulfilled', 'fulfilled_by']
 
  
 
 admin.site.register(User, CustomUserAdmin)
-admin.site.register(Order)
+admin.site.register(Order, OrderAdmin)
 
 # Register your models here.

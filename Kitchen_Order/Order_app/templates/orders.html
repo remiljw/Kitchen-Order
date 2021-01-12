@@ -1,10 +1,35 @@
 {% extends 'base.html' %}
 {% block content %}
-{% if  message  %} 
-{{ message }}
-{% else %}
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
 <h3>Orders </h3>
-{% endif %}
+
+<table>
+
+  <tr>
+    <th>Number</th>
+    <th>Order Details</th>
+    <th>Time Taken</th>
+    <th>Taken By</th>
+    <th>Fulfilled</th>
+    <th>Fulfilled By</th>
+  </tr>
+  {% for order in  all_orders %}
+  <tr>
+    <td>{{ order.order_number }}</td>
+    <td>{{ order.order_details}}</td>
+    <td>{{ order.order_date_time }}</td>
+    <td>{{ order.taken_by }}</td>
+    <td>{{ order.is_fulfilled }}</td>
+    <td>{{ order.fulfilled_by }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+
 
 
 

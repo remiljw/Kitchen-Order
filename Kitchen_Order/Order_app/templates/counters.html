@@ -4,6 +4,11 @@
 {{ message }}
 {% else %}
 <h3>Counters</h3>
+<form method='post'>
+{% csrf_token %}
+{{ form.as_p }}
+<button type='submit'> Take Order</p>
+</form>
 {% endif %}
 
 
