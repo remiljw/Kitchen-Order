@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+<title>{% block title %} Order app | Kitchen {% endblock %}</title>
 {% if  message  %}
 {{ message }}
 {% else %}
@@ -9,6 +10,12 @@ table, th, td {
 }
 </style>
 <h3>Kitchen </h3>
+
+  {% if messages %}
+    {% for message in messages %}
+        <li> {{ message }} </li>
+        {% endfor %}
+   {% endif %}
 
 <table>
 

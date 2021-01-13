@@ -20,22 +20,22 @@
 
 </style>
 <div> 
-        <h1>Welcome to Awesome Website</h1> 
+        <h1>Welcome to Order App Dashboard</h1> 
         <ul>
         {% if request.user.user_type == 'manager' %}
         
-                <li><a href="{% url 'manager' %}">Manager</a></li>
-                <li><a href="{% url 'kitchen' %}">Kitchen</a></li>
-                <li><a href="{% url 'counter' %}">Counter</a></li>
-                <li><a href="{% url 'order' %}">Orders</a></li>
+                <li><a href="{% url 'manager_page' %}">Manager</a></li>
+                <li><a href="{% url 'kitchen_page' %}">Kitchen</a></li>
+                <li><a href="{% url 'counter_page' %}">Counter</a></li>
+                <li><a href="{% url 'order_page' %}">Orders</a></li>
         
                 {% elif request.user.user_type == 'kitchen' %}
-                <li><a href="{% url 'kitchen' %}">Kitchen</a></li>
-                <li><a href="{% url 'order' %}">Orders</a></li>
+                <li><a href="{% url 'kitchen_page' %}">Kitchen</a></li>
+                <li><a href="{% url 'order_page' %}">Orders</a></li>
         
                 {% elif request.user.user_type == 'counter' %}
-                <li><a href="{% url 'counter' %}">Counter</a></li>
-                <li><a href="{% url 'order' %}">Orders</a></li>
+                <li><a href="{% url 'counter_page' %}">Counter</a></li>
+                <li><a href="{% url 'order_page' %}">Orders</a></li>
                 {% endif %}
         <ul>
         <div>

@@ -4,20 +4,20 @@ from django.contrib.auth.models import AbstractUser
 # Create your models here.
 USER_TYPES = (
     ('manager', 'Manager'),
-    ('counter', 'Counter Staff'),
-    ('kitchen', 'Kitchen Staff')
+    ('counter_staff', 'Counter Staff'),
+    ('kitchen_staff', 'Kitchen Staff')
 )
 
 class User(AbstractUser):
     username = models.CharField(max_length=20, unique=True)
-    user_type = models.CharField(max_length=10, choices=USER_TYPES)
+    user_type = models.CharField(max_length=20, choices=USER_TYPES)
 
     def __str__(self):
         return self.username
 
 
 
-class Orders(models.Model):
+class Order(models.Model):
     order_number = models.IntegerField(default='', unique=True)
     order_details = models.TextField(max_length=200)
     order_date_time = models.DateTimeField(auto_now_add=True)

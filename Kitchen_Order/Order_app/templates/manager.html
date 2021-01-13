@@ -1,16 +1,24 @@
 {% extends 'base.html' %}
 {% block content %}
+<title>{% block title %} Order app | Manager {% endblock %}</title>
 {% if  message  %} 
 {{ message }}
 {% else %}
 <h1> Manager </h1>
 
 <p> Create New Users</p>
-<form method='post'>
-{% csrf_token %}
-{{ form.as_p }}
-<button type='submit'> Create User</p></button>
-</form>
+
+  {% if messages %}
+            {% for message in messages %}
+            <li> {{ message }} </li>
+            {% endfor %}
+
+        {% endif %}
+    <form method='post'>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type='submit'> Create User</p></button>
+    </form>
 {% endif %}
 
 
