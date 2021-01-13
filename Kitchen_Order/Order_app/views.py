@@ -10,19 +10,25 @@ from django.contrib import messages
 @login_required
 def dashboard(request):
     user = request.user
-    if user.user_type == 'manager':
-        response = redirect('manager_page')
-    elif user.user_type == 'counter':
+    if user.user_type == 'counter_staff':
         response = redirect('counter_page')
-    elif user.user_type == 'kitchen':
+        return response
+    elif user.user_type == 'kitchen_staff':
         response  = redirect('kitchen_page')
-    return response
+        return response
+    elif user.user_type == 'manager': 
+        response = redirect('manager_page')
+        return response
+    else:
+        messages.error(request,  'You are not authorized to login, contact your manager')
+        return redirect('login')
+
 
 
 @login_required
 def kitchen(request):
     user = request.user
-    if user.user_type == 'counter':
+    if user.user_type != 'kitchen_staff' and user.user_type != 'manager':
         message = 'You are not authorized to view this page'
         return render(request, 'kitchen.html', {'message': message})
     else:
@@ -33,7 +39,7 @@ def kitchen(request):
 @login_required
 def counter(request):
     user = request.user
-    if user.user_type == 'kitchen':
+    if user.user_type != 'counter_staff' and user.user_type != 'manager':
         message = 'You are not authorized to view this page'
         return render(request, 'counters.html', {'message' : message})
     else:
@@ -60,7 +66,7 @@ def manager(request):
     user = request.user
     if user.user_type != 'manager':
         message = 'You are not authorized to view this page'
-        return render(request, 'manager.html', {'message' : message, 'user_form' : user_form})
+        return render(request, 'manager.html', {'message' : message})
     else:
         form = NewUserForm
         if request.method == 'POST':
