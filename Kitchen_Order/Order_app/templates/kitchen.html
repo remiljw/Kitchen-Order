@@ -28,6 +28,7 @@ table, th, td {
     <th> Action </th>
 
   </tr>
+  {% if orders %}
   {% for order in  orders %}
   <tr>
     <td>{{ order.order_number }}</td>
@@ -39,6 +40,9 @@ table, th, td {
 
   </tr>
   {% endfor %}
+  {% else %}
+  <tr><td colspan= 6>No pending orders </td></tr>
+  {% endif %}
 </table>
 {% endif %}
 
