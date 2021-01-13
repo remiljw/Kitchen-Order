@@ -39,7 +39,7 @@
                 {% endif %}
         <ul>
         <div>
-            <p> {{ request.user.username }} | {{ request.user.user_type}} </p>
+            <p> {{ request.user.username }} | {{ request.user.get_user_type_display }} </p>
             <li><a href="{% url 'logout' %}">Log Out</a></li>
         </div>
 
