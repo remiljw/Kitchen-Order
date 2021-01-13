@@ -20,9 +20,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
     path('', dashboard, name='home'),
-    path('manager', manager, name='manager_page'),
-    path('orders', orders, name='order_page'),
-    path('kitchen', kitchen, name='kitchen_page'),
-    path('counter', counter, name='counter_page'),
+    path('manager/', manager, name='manager_page'),
+    path('orders/', orders, name='order_page'),
+    path('kitchen/', kitchen, name='kitchen_page'),
+    path('counter/', counter, name='counter_page'),
     path('fulfill/order/<int:id>/', fulfill_order, name='fulfill_order')
 ]
