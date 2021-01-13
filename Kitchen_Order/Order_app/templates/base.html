@@ -29,11 +29,11 @@
                 <li><a href="{% url 'counter_page' %}">Counter</a></li>
                 <li><a href="{% url 'order_page' %}">Orders</a></li>
         
-                {% elif request.user.user_type == 'kitchen' %}
+                {% elif request.user.user_type == 'kitchen_staff' %}
                 <li><a href="{% url 'kitchen_page' %}">Kitchen</a></li>
                 <li><a href="{% url 'order_page' %}">Orders</a></li>
         
-                {% elif request.user.user_type == 'counter' %}
+                {% elif request.user.user_type == 'counter_staff' %}
                 <li><a href="{% url 'counter_page' %}">Counter</a></li>
                 <li><a href="{% url 'order_page' %}">Orders</a></li>
                 {% endif %}
