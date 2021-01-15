@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect,  HttpResponse
 from django.contrib.auth.decorators import login_required
 from .forms import NewUserForm, NewOrderForm, UpdateOrderForm
 from .models import User, Order
 from datetime import datetime
 from django.contrib import messages
+from django.http import JsonResponse
 
 
 # Create your views here.
@@ -38,6 +39,7 @@ def kitchen(request):
 
 @login_required
 def counter(request):
+    message = {}
     user = request.user
     if user.user_type != 'counter_staff' and user.user_type != 'manager':
         message = 'You are not authorized to view this page'
@@ -51,8 +53,8 @@ def counter(request):
                 new_order.taken_by= user
                 new_order.order_date_time = datetime.now()
                 new_order.save()
-                messages.success(request, 'Order Taken Successfully')
-                return redirect('counter_page')
+                message['success'] = 'Order Taken Successfully'
+                return JsonResponse(message)
         return render(request, 'counters.html', {'form': form})
 
 
