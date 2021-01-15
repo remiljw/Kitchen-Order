@@ -17,7 +17,3 @@ A Django web app that allows a manager create users as counter or kitchen staff.
 - Make sure your Redis server is always on, before you start the django server.
 
 Or use login details below.
-# Login Details
-### Superuser and Manager
-- username: michael
-- password: manager
