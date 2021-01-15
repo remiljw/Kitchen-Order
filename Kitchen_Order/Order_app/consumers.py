@@ -12,7 +12,7 @@ class WSConsumer(AsyncWebsocketConsumer):
         parsed = datetime.strptime(date_time,'%Y-%m-%d %H:%M:%S.%f%z')
         formatted = parsed.strftime('%b. %d, %Y, %-I:%M %p')
         formatted = formatted.replace('AM', 'a.m.').replace('PM', 'p.m.')
-        return formatted    
+        return formatted  
     
     #Retrieve full data of newly placed order
     @database_sync_to_async
@@ -52,8 +52,8 @@ class WSConsumer(AsyncWebsocketConsumer):
         number = event['number']
         details = event['details']
         info = await self._get_order_info(number)
-        time_taken = await self._get_date_time(info['order_date_time'])
-        # time_taken = info['order_date_time']
+        # time_taken = await self._get_date_time(info['order_date_time'])
+        time_taken = info['order_date_time']
         taken_by = info['taken_by']
         fulfilled = info['is_fulfilled']
         fulfilled_by = info['fulfilled_by']       
