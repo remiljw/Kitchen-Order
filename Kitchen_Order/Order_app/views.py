@@ -10,6 +10,7 @@ from django.http import JsonResponse
 # Create your views here.
 @login_required
 def dashboard(request):
+    #Redirects users to their respective dashboards
     user = request.user
     if user.user_type == 'counter_staff':
         response = redirect('counter_page')
@@ -25,7 +26,7 @@ def dashboard(request):
         return redirect('login')
 
 
-
+#Kitchen Staff Page
 @login_required
 def kitchen(request):
     user = request.user
@@ -36,7 +37,7 @@ def kitchen(request):
         orders = Order.objects.filter(is_fulfilled=False)
         return render(request, 'kitchen.html', {'orders':orders})
 
-
+#Counter Staff Page
 @login_required
 def counter(request):
     message = {}
@@ -55,14 +56,17 @@ def counter(request):
                 new_order.save()
                 message['success'] = 'Order Taken Successfully'
                 return JsonResponse(message)
+            message['error'] = form.errors
+            message['err_code'] = 400
+            return JsonResponse(message)
         return render(request, 'counters.html', {'form': form})
 
-
+#Orders Page
 def orders(request):
     all_orders = Order.objects.all()
     return render(request, 'orders.html', {'all_orders' : all_orders})
 
-
+#Manager's Page
 @login_required
 def manager(request):
     user = request.user
@@ -79,6 +83,7 @@ def manager(request):
                 return redirect('/')
         return render(request, 'manager.html', {'form' : form})
 
+#Kitchen Staff Page
 @login_required
 def fulfill_order(request, id):
     user = request.user

@@ -1,5 +1,5 @@
 var ws_url = 'ws://' + window.location.host + '/ws/orders/';
-    var orderSocket = new WebSocket(ws_url);
+var orderSocket = new WebSocket(ws_url);
 
 function connect() {
   orderSocket.onopen = function() {
