@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Order_app',
-    'channels'
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -101,18 +101,19 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-REDIS_URL = os.getenv('REDIS_URL','redis://localhost:6379')
+ASGI_APPLICATION = 'Kitchen_Order.asgi.application'
 
-CHANNEK_LAYERS = {
+
+CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            'hosts': [REDIS_URL]
-        }
-    }
+            'hosts': [('127.0.0.1', 6379)],
+        },
+    },
 }
 
-ASGI_APPLICATION = 'Kitchen_Order.routing.application'
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -132,6 +133,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+TATIC_ROOT = os.path.join(BASE_DIR, "Order_app/static")
 AUTH_USER_MODEL = 'Order_app.User'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'login'

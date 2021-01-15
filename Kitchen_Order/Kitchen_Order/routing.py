@@ -1,6 +1,7 @@
-from django.core.asgi import get_asgi_application
-from channels.routing import ProtocolTypeRouter
+from django.urls import re_path
 
-application = ProtocolTypeRouter({
-    'http': get_asgi_application(),
-})
+from Order_app import consumers
+
+webspcket_urlpatterns  = [
+    
+]
