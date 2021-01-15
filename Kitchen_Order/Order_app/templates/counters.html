@@ -7,21 +7,25 @@
 {% else %}
     <h3>Counter</h3>
     <p> Take Order<p>
-        {% if messages %}
-            {% for message in messages %}
-            <li> {{ message }} </li>
-            {% endfor %}
+     
+            <li class='message'> </li>
+            <li class='error'> </li>
+           
 
-        {% endif %}
+       
 
-        <form method='post'>
+        <form id='new_order' method='post'>
         {% csrf_token %}
         {{ form.as_p }}
-        <button type='submit'> Take Order</p></button>
+        <button type='submit' id='submit'> Take Order</p></button>
         </form>
-
+       
+       
+       
+       
 
 {% endif %} 
-
+ <script src="/static/js/jquery-2.2.4.min.js"></script>
+ <script src="/static/js/counter.js"></script>
 
 {% endblock %}

@@ -5,7 +5,7 @@
 {{ message }}
 {% else %}
 <style>
-table, th, td {
+#order, th, td {
   border: 1px solid black;
 }
 </style>
@@ -17,7 +17,7 @@ table, th, td {
         {% endfor %}
    {% endif %}
 
-<table>
+<table id='order'>
 
   <tr>
     <th>Order Number</th>
@@ -46,6 +46,7 @@ table, th, td {
 </table>
 {% endif %}
 
-
+<script src="/static/js/jquery-2.2.4.min.js"></script>
+<script src="/static/js/kitchen.js"></script>
 
 {% endblock %}

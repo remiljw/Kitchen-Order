@@ -2,15 +2,15 @@
 {% block content %}
 <title>{% block title %} Order app | Orders {% endblock %}</title>
 <style>
-table, th, td {
+#order, th, td {
   border: 1px solid black;
 }
 </style>
 <h3>Orders </h3>
 
-<table>
+<table id='order'>
 
-  <tr>
+  <tr >
     <th>Number</th>
     <th>Order Details</th>
     <th>Time Taken</th>
@@ -25,13 +25,11 @@ table, th, td {
     <td>{{ order.order_date_time }}</td>
     <td>{{ order.taken_by }}</td>
     <td>{{ order.is_fulfilled }}</td>
-    <td>{{ order.fulfilled_by }}</td>
+    <td>{{ order.fulfilled_by }}</td> 
   </tr>
   {% endfor %}
 </table>
 
-
-
-
-
+<script src="/static/js/jquery-2.2.4.min.js"></script>
+<script src="/static/js/orders.js"></script>
 {% endblock %}
