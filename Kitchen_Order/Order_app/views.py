@@ -82,7 +82,7 @@ def manager(request):
 @login_required
 def fulfill_order(request, id):
     user = request.user
-    obj = Order.objects.get(id=id)
+    obj = Order.objects.get(order_number=id)
     form = UpdateOrderForm(request.POST or None, instance=obj)
     if form.is_valid():
         update_order = form.save(commit=False)

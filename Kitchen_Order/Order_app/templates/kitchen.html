@@ -36,7 +36,7 @@
     <td>{{ order.order_date_time }}</td>
     <td>{{ order.taken_by }}</td>
     <td>{{ order.is_fulfilled }}</td>
-    <td><a href="{% url 'fulfill_order' id=order.id %}">Fulfill Order</a></td>
+    <td><a href="{% url 'fulfill_order' id=order.order_number %}">Fulfill Order</a></td>
 
   </tr>
   {% endfor %}

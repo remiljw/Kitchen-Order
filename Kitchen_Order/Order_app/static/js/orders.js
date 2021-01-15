@@ -20,7 +20,7 @@ orderSocket.onmessage = function(message) {
     )
 
     ele.append(
-        $("<td></td>").text(data.fulfilled_by)
+        $("<td></td>").text('None')
     )
     
     

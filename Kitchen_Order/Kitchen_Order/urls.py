@@ -24,5 +24,5 @@ urlpatterns = [
     path('orders/', orders, name='order_page'),
     path('kitchen/', kitchen, name='kitchen_page'),
     path('counter/', counter, name='counter_page'),
-    path('fulfill/order/<int:id>/', fulfill_order, name='fulfill_order')
+    path('kitchen/fulfill-order/<int:id>/', fulfill_order, name='fulfill_order')
 ]

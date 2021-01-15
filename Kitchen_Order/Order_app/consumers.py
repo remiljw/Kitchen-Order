@@ -18,14 +18,7 @@ class WSConsumer(AsyncWebsocketConsumer):
         order_post  =json.loads(json_post)
         return order_post
 
-    # @database_sync_to_async
-    # def _get_order_info(self, number):
-    #     order_info = (Order.objects.filter(order_number=number).values('order_date_time', 'taken_by', 'is_fulfilled', 'fulfilled_by'))
-    #     json_post = json.dumps(list(order_info), sort_keys=True, default=str)
-    #     order_post  =json.loads(json_post)
-    #     return order_post
-  
-
+    
     async def connect(self):
         self.groupname = 'new_orders'
         await self.channel_layer.group_add(
@@ -50,7 +43,7 @@ class WSConsumer(AsyncWebsocketConsumer):
         info = await self._get_order_info(number)
         time_taken = info['order_date_time']
         taken_by = info['taken_by']
-        fulfilled = info['is_fulfilled'] 
+        fulfilled = info['is_fulfilled']
         fulfilled_by = info['fulfilled_by']       
  
 
