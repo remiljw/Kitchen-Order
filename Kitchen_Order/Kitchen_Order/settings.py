@@ -133,7 +133,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-TATIC_ROOT = os.path.join(BASE_DIR, "Order_app/static")
+STATIC_ROOT = os.path.join(BASE_DIR, "Order_app/static")
 AUTH_USER_MODEL = 'Order_app.User'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'login'
